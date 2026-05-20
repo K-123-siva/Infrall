@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Console Error Checker</title>
+</head>
+<body>
+    <h1>Open Browser Console (F12) and check localhost:5173</h1>
+    <h2>Common Issues:</h2>
+    <ol>
+        <li>Check if there are any RED errors in console</li>
+        
+        <li>Look for "Failed to fetch" or "Network Error"</li>
+        <li>Check if VITE_GOOGLE_CLIENT_ID is set</li>
+        <li>Verify backend is running on port 5000</li>
+    </ol>
+    
+    <h3>Quick Test:</h3>
+    <button onclick="testBackend()">Test Backend Connection</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testBackend() {
+            try {
+                const response = await fetch('http://localhost:5000/api/listings');
+                const data = await response.json();
+                document.getElementById('result').innerHTML = '<p style="color: green;">✅ Backend is working! Found ' + data.listings.length + ' listings</p>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<p style="color: red;">❌ Backend error: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>
