@@ -43,6 +43,7 @@ export interface Listing {
   
   // Leisure property feature
   isLeisure?: boolean;
+  maxLeasePeriodYears?: number;
   
   // Materials/Furniture/Electronics/Vehicles specific
   brand?: string;
