@@ -1,228 +1,126 @@
-# KothiLikki
+# INFRAALL - Property Rental & Sale Platform
 
-A comprehensive real estate and services platform built with React and Node.js.
-
-## Features
-
-### Property Management
-- **Buy Property**: Browse and purchase properties
-- **Rent Property**: Find rental properties with flexible options
-- **Leisure Lease**: Multi-year property leasing with owner-defined maximum periods
-- **Post Property**: List your property for free
-
-### Additional Services
-- **Furniture Rental**: Quality furniture on flexible rental plans
-- **Home Services**: Professional services (plumbing, painting, cleaning, etc.)
-- **Building Materials**: Wholesale rates on construction materials
-
-### Advanced Features
-- **Advertisement System**: Dynamic promotional banners and featured items
-- **Random Featured Items**: Different items displayed on each page load
-- **KYC Verification**: Secure user verification system
-- **Payment Integration**: Razorpay payment gateway
-- **Owner Portal**: Automated account creation for property owners
-- **Vendor Management**: Vendor assignment and tracking
-- **Admin Dashboard**: Comprehensive admin controls
+A comprehensive property management platform for rentals, sales, and home services by INFRAALL.com.
 
 ## Tech Stack
 
 ### Frontend
-- React with TypeScript
-- Vite
+- React 19 with TypeScript
+- Vite (Build Tool)
+- TailwindCSS 4.0
+- React Router v7
 - Zustand (State Management)
-- Lucide Icons
-- Axios
+- Socket.io Client (Real-time)
+- Google OAuth
+- Razorpay Integration
 
 ### Backend
-- Node.js
-- Express.js
-- MySQL with Sequelize ORM
+- Node.js + Express.js
+- MySQL Database
+- Sequelize ORM
 - JWT Authentication
-- Razorpay Payment Gateway
-- Cloudinary (Image Storage)
-- Nodemailer (Email Service)
+- Passport.js (Google OAuth)
+- Cloudinary (File Storage)
+- Razorpay (Payment Gateway)
+- Socket.io (Real-time)
+- Nodemailer (Email)
+- Node-cron (Scheduled Tasks)
 
-## Project Structure
+## Features
 
-```
-LikhithaProj-main/
-├── frontend/          # React frontend application
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── store/
-│   │   └── api.ts
-│   └── package.json
-│
-├── backend/           # Node.js backend application
-│   ├── src/
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── middleware/
-│   │   └── config/
-│   ├── scripts/       # Database migration scripts
-│   └── package.json
-│
-└── README.md
-```
+- Property Listings (Rent/Sale)
+- Furniture Rental
+- Building Materials
+- Leisure/Event Spaces
+- Home Services & Subscriptions
+- Admin Dashboard
+- Owner Portal
+- Payment Integration (Razorpay)
+- Google OAuth Login
+- Real-time Notifications
+- Advertisement System
 
-## Setup Instructions
+## Quick Start (Local Development)
 
 ### Prerequisites
-- Node.js (v16 or higher)
-- MySQL (v8 or higher)
-- npm or yarn
+- Node.js 18+
+- MySQL 8+
+- Git
 
-### Backend Setup
+### Setup
 
-1. Navigate to backend directory:
+1. **Clone Repository**
+```bash
+git clone <your-repo-url>
+cd KothiLikki-main
+```
+
+2. **Backend Setup**
 ```bash
 cd backend
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
 
-3. Create `.env` file with the following variables:
-```env
-DB_HOST=localhost
-DB_USER=your_mysql_user
-DB_PASSWORD=your_mysql_password
-DB_NAME=infraall_db
-JWT_SECRET=your_jwt_secret
-RAZORPAY_KEY_ID=your_razorpay_key
-RAZORPAY_KEY_SECRET=your_razorpay_secret
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_cloudinary_key
-CLOUDINARY_API_SECRET=your_cloudinary_secret
-EMAIL_USER=your_email
-EMAIL_PASS=your_email_password
-```
+# Configure .env file (see .env.example)
+# Update database credentials, API keys, etc.
 
-4. Run database migrations:
-```bash
-node scripts/addLeisureFeature.js
-node scripts/addMaxLeasePeriod.js
-node scripts/addLeaseDuration.js
-```
-
-5. Start the server:
-```bash
 npm start
 ```
 
-Backend will run on `http://localhost:5000`
-
-### Frontend Setup
-
-1. Navigate to frontend directory:
+3. **Frontend Setup**
 ```bash
 cd frontend
-```
-
-2. Install dependencies:
-```bash
 npm install
-```
 
-3. Create `.env` file:
-```env
-VITE_API_URL=http://localhost:5000/api
-VITE_RAZORPAY_KEY_ID=your_razorpay_key
-```
+# Configure .env file (see .env.example)
+# Update API URL and keys
 
-4. Start the development server:
-```bash
 npm run dev
 ```
 
-Frontend will run on `http://localhost:5173`
+4. **Database Setup**
+- Create MySQL database named `nestbazaar`
+- Tables will be created automatically by Sequelize
 
-## Key Features Documentation
+5. **Access Application**
+- Frontend: http://localhost:5173
+- Backend: http://localhost:5000
 
-### Leisure Lease System
-- Owners can specify maximum lease period (1-10 years)
-- Users can select lease duration up to the maximum
-- Multi-year payment calculation
-- Conflict detection for overlapping bookings
+## Deployment
 
-### Advertisement System
-- Auto-rotating promotional banners
-- Service feature cards
-- Dynamic featured items from all categories
-- Random item selection on each page load
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions for:
+- Render (Backend)
+- Vercel/Netlify (Frontend)
+- Railway/PlanetScale (Database)
 
-### Owner Account Management
-- Automatic account creation when property is listed
-- Email notifications with password setup links
-- Secure password setup process
-- Owner portal access
+## Environment Variables
 
-## API Endpoints
+### Backend (.env)
+```
+PORT=5000
+DB_HOST=your-db-host
+DB_USER=your-db-user
+DB_PASSWORD=your-db-password
+DB_NAME=nestbazaar
+JWT_SECRET=your-secret
+CLOUDINARY_CLOUD_NAME=your-cloudinary-name
+CLOUDINARY_API_KEY=your-cloudinary-key
+CLOUDINARY_API_SECRET=your-cloudinary-secret
+CLIENT_URL=your-frontend-url
+RAZORPAY_KEY_ID=your-razorpay-key
+RAZORPAY_KEY_SECRET=your-razorpay-secret
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+```
 
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
+### Frontend (.env)
+```
+VITE_API_URL=your-backend-url
+VITE_GOOGLE_CLIENT_ID=your-google-client-id
+VITE_RAZORPAY_KEY_ID=your-razorpay-key
+```
 
-### Listings
-- `GET /api/listings` - Get all listings (supports filters and random sort)
-- `GET /api/listings/:id` - Get single listing
-- `POST /api/listings` - Create listing
-- `PUT /api/listings/:id` - Update listing
-- `DELETE /api/listings/:id` - Delete listing
-
-### Leisure Lease
-- `POST /api/leisure-lease/create-order` - Create lease order
-- `POST /api/leisure-lease/verify-payment` - Verify payment
-- `GET /api/leisure-lease/user` - Get user's leases
-
-### Admin
-- `GET /api/admin/users` - Get all users
-- `GET /api/admin/listings` - Get all listings
-- `POST /api/admin/verify-listing/:id` - Verify listing
-
-## Database Schema
-
-### Main Tables
-- **Users**: User accounts and authentication
-- **Listings**: Property and service listings
-- **LeisureLeases**: Multi-year property leases
-- **KYC**: User verification documents
-- **Rentals**: Monthly rental agreements
-- **Purchases**: Purchase transactions
-- **ServiceRequests**: Service bookings
-- **Vendors**: Service provider accounts
-
-## Recent Updates
-
-### Leisure Lease Duration Feature
-- Added `maxLeasePeriodYears` field to Listings
-- Added `leaseDurationYears` field to LeisureLeases
-- Updated UI to support multi-year lease selection
-- Enhanced backend validation for lease conflicts
-
-### Random Featured Items
-- Implemented random sorting in backend API
-- Added client-side shuffling for display order
-- Shows different items from each category on every page load
-- Two-level randomization for maximum variety
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## Admin Credentials
+Check your .env file for admin email and password.
 
 ## License
-
-This project is proprietary and confidential.
-
-## Contact
-
-For any queries, please contact the development team.
+MIT

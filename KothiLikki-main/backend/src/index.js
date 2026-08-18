@@ -89,15 +89,21 @@ setupSocket(io);
 
 const PORT = process.env.PORT || 5000;
 
-sequelize.sync({ force: false }).then(() => {
-  server.listen(PORT, () => {
-    console.log(`INFRAALL server running on port ${PORT}`);
-    
-    // Start rental management cron jobs
-    RentalCronService.start();
-    
-    // Start leisure lease expiry check
-    LeisureLeaseCronService.start();
+sequelize.authenticate()
+  .then(() => {
+    console.log('✅ Database connected successfully');
+    server.listen(PORT, () => {
+      console.log(`🚀 INFRAALL server running on port ${PORT}`);
+      
+      // Start rental management cron jobs
+      RentalCronService.start();
+      
+      // Start leisure lease expiry check
+      LeisureLeaseCronService.start();
+    });
+  })
+  .catch((err) => {
+    console.error('❌ DB connection failed:', err);
+    process.exit(1);
   });
-}).catch((err) => console.error('DB connection failed:', err));
 
